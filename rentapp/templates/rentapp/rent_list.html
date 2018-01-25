@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rentapp</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	
+</head>
+
+<body>
+  {% block content %}
+	    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Rentapp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+                
+            
+          
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'rentapp:rent-form' %}">Post a rent</a>
+            </li>
+
+            <li class="nav-item active">
+          
+              
+              {% else %}
+                  <a class="nav-link active" href="{% url 'accounts:login' %}">Login</a>
+                    <li class="nav-item active">
+                       <a class="nav-link" href="{% url 'accounts:logout' %}">Signin</a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'rentapp:rent-form' %}">Post a rent</a>
+                    </li>
+            
+                 {% endif %}
+               </li>
+              
+               
+
+              
+            
+          </ul>
+          <form class="form-inline mt-2 mt-md-0" url = "{% url 'rentapp:rent-list' %}" method = 'get' accept-charset="utf-8">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name='q' value="{{request.GET.q}}" method="get">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    {% endblock %}
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <div class="jumbortan"></div>
+	
+	<h1 class="java">Rent available</h1>
+	<div class="Django">
+    {% block body %}
+	{% for obj in object_list %}
+ 
+          <img src="{{obj.image.url}}"  width="200" height"200"></img>
+          <br>
+          
+               <div>
+                <div>
+                  <p>Located at: {{ obj.location }}</p>
+                  <p>Rooms available : {{obj.rooms_available}}</p>
+                  <p>Owner name : {{obj.owner_name}}</p>
+                  <p>Contact No : {{obj.owner_phone_no}}</p>
+                </div>
+              </div>
+  
+
+
+             
+          
+            
+
+           
+
+
+
+    <br>
+    <hr>
+    
+     {% endfor %}
+     
+   </div>
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+</div>
+
+    </div>
+
+
+</body>
+</html>
