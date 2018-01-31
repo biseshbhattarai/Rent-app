@@ -12,6 +12,7 @@ def register(request):
 		form = UserForm(request.POST)
 		if form.is_valid():
 			form.save()
+		
 			return HttpResponseRedirect(reverse('accounts:login'))
 	else:
 	    form = UserForm()

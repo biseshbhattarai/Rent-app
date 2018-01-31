@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>RentForm</title>
+	<title>Rentform</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
 </head>
-<body>
-	<form method="post" enctype = "multipart/form-data">
+
+<body class="text-center">
+	<form method="post" class="form-signin" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{form.as_p}}
-		<input type="Submit" name="Submit">
+		
+	
+		<button class="btn btn-lg btn-primary btn" type="submit">Save changes</button><br>
+		
+	
+	
 	</form>
 
 </body>

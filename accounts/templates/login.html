@@ -6,12 +6,18 @@
 	{% load static %}
     <link rel="stylesheet" href="{% static 'css/style2.css' %}">
 </head>
+{% block content %}
 <body class="text-center">
 	<form method="post" class="form-signin">
 		{% csrf_token %}
 		{{form.as_p}}
+		{% endblock %}
+		{% block body %}
+		<button class="btn btn-lg btn-primary btn" type="submit">Login</button><br>
+		<br>
 		
-		<button class="btn btn-lg btn-primary btn" type="submit">Login</button>
+		<p>Don't have a account signin here<a href="{% url "accounts:register" %}"> Signin</a></p>
+		{% endblock %}
 	</form>
 
 </body>

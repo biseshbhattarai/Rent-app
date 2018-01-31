@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>SignIn</title>
-</head>
-<body>
-	<form action={% url 'accounts:register' %} method="post">
-		{% csrf_token %}
-		{{form.as_p}}
-		
+{% extends 'login.html' %}
 
-		<input type="Submit" name="Signin">
-		
-	</form>
-		
-
-</body>
-</html>
+{% block body %}
+<button class="btn btn-lg btn-primary btn" type="submit">Signin</button>
+{% endblock %}

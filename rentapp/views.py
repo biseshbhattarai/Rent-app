@@ -14,7 +14,8 @@ def rentlist(request):
     query = request.GET.get("q")
     if query:
         rent_list = rent_list.filter(
-            Q(location__icontains=query)
+            Q(location__icontains=query)|
+            Q(rooms_available__icontains=query)
             # Q(user__username__icontains=query)
 
             ).distinct()    
